@@ -1,97 +1,117 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Patch>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingDef ParentName="RVFFA_BaseBullet">
+		<defName>RVFFA_PistolBullet</defName>
+		<graphicData>
+			<texPath>RimValiFFA/Things/Weapons/Guns/Bullet/SmallBullet</texPath>
+		</graphicData>
+		<projectile>
+			<damageAmountBase>8</damageAmountBase>
+			<stoppingPower>0.5</stoppingPower>
+			<speed>150</speed>
+			<armorPenetrationBase>0.185</armorPenetrationBase>
+		</projectile>
+	</ThingDef>
 
-	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[defName="RVFFA_IlluminatePistol"]/tools</xpath>
-		<value>
-			<tools>
-				<li Class="CombatExtended.ToolCE">
-					<label>stock</label>
-					<capacities>
-						<li>Blunt</li>
-					</capacities>
-					<power>8</power>
-					<cooldownTime>1.55</cooldownTime>
-					<chanceFactor>1.5</chanceFactor>
-					<armorPenetrationBlunt>2.755</armorPenetrationBlunt>
-					<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
-				</li>
-				<li Class="CombatExtended.ToolCE">
-					<label>barrel</label>
-					<capacities>
-						<li>Blunt</li>
-					</capacities>
-					<power>5</power>
-					<cooldownTime>2.02</cooldownTime>
-					<armorPenetrationBlunt>1.630</armorPenetrationBlunt>
-					<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
-				</li>
-				<li Class="CombatExtended.ToolCE">
-					<label>muzzle</label>
-					<capacities>
-						<li>Poke</li>
-					</capacities>
-					<power>8</power>
-					<cooldownTime>1.55</cooldownTime>
-					<armorPenetrationBlunt>2.755</armorPenetrationBlunt>
-					<linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
-				</li>
-			</tools>
-		</value>
-	</Operation>
-
-	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+	<ThingDef ParentName="RVFFA_WeaponMakeableLathe">
 		<defName>RVFFA_IlluminatePistol</defName>
+		<label>Illuminate Pistol</label>
+		<description>A common Illuminate pattern pistol. Unlike its Terran counterparts this weapon uses coil-based acceleration. Whilst It has more accuracy and a shorter travel time than a Terran auto pistol, it hits with less power when compared to one.</description>
+
+		<graphicData>
+			<texPath>RimValiFFA/Things/Weapons/Guns/Pistol</texPath>
+			<drawSize>0.5</drawSize>
+		</graphicData>
+
+		<uiIconScale>1.4</uiIconScale>
+
 		<statBases>
+			<WorkToMake>4500</WorkToMake>
 			<Mass>1.5</Mass>
-			<RangedWeapon_Cooldown>0.38</RangedWeapon_Cooldown>
-			<SightsEfficiency>0.9</SightsEfficiency>
-			<ShotSpread>0.13</ShotSpread>
-			<SwayFactor>1.08</SwayFactor>
-			<Bulk>1.90</Bulk>
-			<WorkToMake>7000</WorkToMake>
+			<AccuracyTouch>0.87</AccuracyTouch>
+			<AccuracyShort>0.92</AccuracyShort>
+			<AccuracyMedium>0.77</AccuracyMedium>
+			<AccuracyLong>0.55</AccuracyLong>
+			<RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
 		</statBases>
+		<comps>
+			<li Class="CompProperties_CompAnalyzableUnlockResearch">
+				<analysisID>4556</analysisID>
+				<requiresMechanitor>false</requiresMechanitor>
+
+				<!-- Analyzable -->
+
+				<analysisDurationHours>24.5</analysisDurationHours>
+				<destroyedOnAnalyzed>true</destroyedOnAnalyzed>
+				<completedLetterLabel>Illuminate Pistol studied: {RESEARCH} unlocked</completedLetterLabel>
+				<completedLetter>By studying the pistol's design, {PAWN_labelShort} has acquired the insight needed for the research project(s) {RESEARCH}.\n\nYour researchers can now use research benches to begin researching how to actually use the technology.</completedLetter>
+				<completedLetterDef>PositiveEvent</completedLetterDef>
+
+				<!-- Interactable -->
+
+				<activateTexPath>UI/Icons/Study</activateTexPath>
+
+				<activateLabelString>Analyze...</activateLabelString>
+				<activateDescString>Analyze the Illuminate Pistol.</activateDescString>
+				<jobString>Analyze pistol</jobString>
+				<guiLabelString>Choose who should analyze this</guiLabelString>
+				<inspectString>Can be analyzed by a colonist.</inspectString>
+
+				<targetingParameters>
+					<canTargetBuildings>false</canTargetBuildings>
+					<canTargetAnimals>false</canTargetAnimals>
+					<canTargetMechs>false</canTargetMechs>
+					<onlyTargetControlledPawns>true</onlyTargetControlledPawns>
+				</targetingParameters>
+			</li>
+		</comps>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>RVFFA_PistolBullet</defaultProjectile>
+				<warmupTime>0.3</warmupTime>
+				<range>29.9</range>
+				<soundCast>Shot_Autopistol</soundCast>
+				<soundCastTail>GunTail_Light</soundCastTail>
+				<muzzleFlashScale>0</muzzleFlashScale>
+				<ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+				<burstShotCount>1</burstShotCount>
+			</li>
+		</verbs>
+
+		<tools>
+			<li>
+				<label>grip</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>9</power>
+				<cooldownTime>1.8</cooldownTime>
+			</li>
+			<li>
+				<label>barrel</label>
+				<capacities>
+					<li>Blunt</li>
+					<li>Poke</li>
+				</capacities>
+				<power>9</power>
+				<cooldownTime>1.8</cooldownTime>
+			</li>
+		</tools>
+
 		<costList>
 			<Steel>10</Steel>
 			<ComponentIndustrial>3</ComponentIndustrial>
 			<RVFFA_ProcessedTungsten>5</RVFFA_ProcessedTungsten>
 		</costList>
-		<Properties>
-			<recoilAmount>1.1</recoilAmount>
-			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
-			<hasStandardCommand>true</hasStandardCommand>
-			<defaultProjectile>RVFFA_IlluminateCommonAmmoFMJ</defaultProjectile>
-			<warmupTime>0.3</warmupTime>
-			<range>28</range>
-			<ticksBetweenBurstShots>2</ticksBetweenBurstShots>
-			<burstShotCount>1</burstShotCount>
-			<!-- Deleting this field will make the weapon fire single shots. -->
-			<soundCast>Shot_Autopistol</soundCast>
-			<soundCastTail>GunTail_Medium</soundCastTail>
-			<muzzleFlashScale>1</muzzleFlashScale>
-			<!-- The higher this value, the more visible the shooter is when firing in the dark. -->
-			<targetParams>
-				<canTargetLocations>true</canTargetLocations>
-			</targetParams>
-		</Properties>
-		<AmmoUser>
-			<magazineSize>50</magazineSize>
-			<reloadTime>4.9</reloadTime>
-			<ammoSet>RVFFA_PistolAmmoSetCommon</ammoSet>
-			<reloadOneAtATime>True</reloadOneAtATime>
-		</AmmoUser>
-		<FireModes>
-			<aiUseBurstMode>FALSE</aiUseBurstMode>
-			<aiAimMode>Snapshot</aiAimMode>
-		</FireModes>
-		<weaponTags>
-			<li>CE_Sidearm</li>
-			<li>CE_AI_BROOM</li>
-			<li>CE_OneHandedWeapon</li>
-		</weaponTags>
-		<researchPrerequisite>RVFFA_BasicWeaponsTech</researchPrerequisite>
-		<AllowWithRunAndGun>true</AllowWithRunAndGun>
-		<!-- When the Run And Gun mod is enabled, can this weapon be fired on the move? -->
-	</Operation>
 
-</Patch>
+		<recipeMaker>
+			<researchPrerequisite>RVFFA_BasicWeaponsTech</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>2</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+</Defs>

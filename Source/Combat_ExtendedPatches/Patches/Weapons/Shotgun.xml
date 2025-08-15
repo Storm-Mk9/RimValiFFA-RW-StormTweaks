@@ -1,96 +1,84 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Patch>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingDef ParentName="RVFFA_BaseBullet">
+		<defName>RVFFA_ShotgunBullet</defName>
+		<graphicData>
+			<texPath>RimValiFFA/Things/Weapons/Guns/Bullet/ShotgunBullet</texPath>
+			
+		</graphicData>
+		<projectile>
+			<stoppingPower>3</stoppingPower>
+			<damageAmountBase>24</damageAmountBase>
+			<speed>150</speed>
+			<armorPenetrationBase>0.33</armorPenetrationBase>
+		</projectile>
+	</ThingDef>
 
-	<Operation Class="PatchOperationReplace">
-		<xpath>
-			Defs/ThingDef[defName="RVFFA_IlluminateShotgun"]/tools <!-- This works the same as patching a melee weapon. -->
-		</xpath>
-		<value>
-			<tools>
-				<li Class="CombatExtended.ToolCE">
-					<label>stock</label>
-					<capacities>
-						<li>Blunt</li>
-					</capacities>
-					<power>8</power>
-					<cooldownTime>1.55</cooldownTime>
-					<chanceFactor>1.5</chanceFactor>
-					<armorPenetrationBlunt>2.755</armorPenetrationBlunt>
-					<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
-				</li>
-				<li Class="CombatExtended.ToolCE">
-					<label>barrel</label>
-					<capacities>
-						<li>Blunt</li>
-					</capacities>
-					<power>5</power>
-					<cooldownTime>2.02</cooldownTime>
-					<armorPenetrationBlunt>1.630</armorPenetrationBlunt>
-					<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
-				</li>
-				<li Class="CombatExtended.ToolCE">
-					<label>muzzle</label>
-					<capacities>
-						<li>Poke</li>
-					</capacities>
-					<power>8</power>
-					<cooldownTime>1.55</cooldownTime>
-					<armorPenetrationBlunt>2.755</armorPenetrationBlunt>
-					<linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
-				</li>
-			</tools>
-		</value>
-	</Operation>
-
-	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+	<ThingDef ParentName="RVFFA_WeaponMakeableLathe">
 		<defName>RVFFA_IlluminateShotgun</defName>
+		<label>Illuminate Shotgun</label>
+		<description>An Illuminate Pattern shotgun. Together with its advanced coil technology and a simple choke at the end, it fires a highly concentrated wad of pellets towards its enemies. Whilst longer range than its Terran counterparts, it has to trade in short range usability to make this possible.</description>
+
+		<graphicData>
+			<texPath>RimValiFFA/Things/Weapons/Guns/Shotgun</texPath>
+		</graphicData>
+
+		<soundInteract>Interact_Shotgun</soundInteract>
+		<thingSetMakerTags>
+			<li>RewardStandardQualitySuper</li>
+		</thingSetMakerTags>
 		<statBases>
-			<Mass>3.5</Mass>
-			<RangedWeapon_Cooldown>1.7</RangedWeapon_Cooldown>
-			<SightsEfficiency>0.9</SightsEfficiency>
-			<ShotSpread>0.15</ShotSpread>
-			<SwayFactor>1.38</SwayFactor>
-			<Bulk>1.90</Bulk>
 			<WorkToMake>22000</WorkToMake>
+			<Mass>5.0</Mass>
+			<AccuracyTouch>0.68</AccuracyTouch>
+			<AccuracyShort>0.79</AccuracyShort>
+			<AccuracyMedium>0.82</AccuracyMedium>
+			<AccuracyLong>0.65</AccuracyLong>
+			<RangedWeapon_Cooldown>1.65</RangedWeapon_Cooldown>
 		</statBases>
 		<costList>
 			<Steel>70</Steel>
 			<ComponentIndustrial>4</ComponentIndustrial>
 			<RVFFA_ProcessedTungsten>3</RVFFA_ProcessedTungsten>
 		</costList>
-		<Properties>
-			<recoilAmount>1.1</recoilAmount>
-			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
-			<hasStandardCommand>true</hasStandardCommand>
-			<defaultProjectile>RVFFA_ShotgunBuckshotBullet</defaultProjectile>
-			<warmupTime>1.6</warmupTime>
-			<range>26</range>
-			<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
-			<burstShotCount>1</burstShotCount>
-			<!-- Deleting this field will make the weapon fire single shots. -->
-			<soundCast>Shot_Autopistol</soundCast>
-			<soundCastTail>GunTail_Medium</soundCastTail>
-			<muzzleFlashScale>1</muzzleFlashScale>
-			<!-- The higher this value, the more visible the shooter is when firing in the dark. -->
-			<targetParams>
-				<canTargetLocations>true</canTargetLocations>
-			</targetParams>
-		</Properties>
-		<AmmoUser>
-			<magazineSize>6</magazineSize>
-			<reloadTime>0.9</reloadTime>
-			<ammoSet>RVFFA_ShotgunAmmoSet</ammoSet>
-			<reloadOneAtATime>True</reloadOneAtATime>
-		</AmmoUser>
-		<FireModes>
-			<aiUseBurstMode>FALSE</aiUseBurstMode>
-			<aiAimMode>Snapshot</aiAimMode>
-		</FireModes>
-		<weaponTags>
-			<li>CE_AI_BROOM</li>
-		</weaponTags>
-		<researchPrerequisite>RVFFA_AdvancedWeaponryTech</researchPrerequisite>
-		<AllowWithRunAndGun>true</AllowWithRunAndGun>
-		<!-- When the Run And Gun mod is enabled, can this weapon be fired on the move? -->
-	</Operation>
-</Patch>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>RVFFA_ShotgunBullet</defaultProjectile>
+				<warmupTime>1.9</warmupTime>
+				<range>24</range>
+				<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+				<burstShotCount>1</burstShotCount>
+				<soundCast>Shot_Shotgun</soundCast>
+				<soundCastTail>GunTail_Medium</soundCastTail>
+				<muzzleFlashScale>0</muzzleFlashScale>
+			</li>
+		</verbs>
+
+		<tools>
+			<li>
+				<label>stock</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>9</power>
+				<cooldownTime>2</cooldownTime>
+			</li>
+			<li>
+				<label>barrel</label>
+				<capacities>
+					<li>Blunt</li>
+					<li>Poke</li>
+				</capacities>
+				<power>9</power>
+				<cooldownTime>2</cooldownTime>
+			</li>
+		</tools>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>2</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+</Defs>
